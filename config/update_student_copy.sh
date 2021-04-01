@@ -1,4 +1,4 @@
-FOLDER=csc-466-student
+FOLDER=csc-466-student-instructor
 rm -rf ../$FOLDER/*
 cp requirements.txt ../$FOLDER/
 cp install.sh ../$FOLDER/
