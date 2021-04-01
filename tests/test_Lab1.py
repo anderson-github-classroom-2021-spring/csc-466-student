@@ -50,9 +50,9 @@ def test_exercise_8():
     
 def test_exercise_9():
     sel = helper.exercise_9(titanic_df)
-    assert np.all(answers['exercise_9'] == sel)
+    assert np.all(answers['exercise_9'].values == sel.values)
 
 def test_exercise_10():
     titanic_df_copy = titanic_df.set_index('Name')
     helper.exercise_10(titanic_df_copy)
-    assert np.all(answers['exercise_10'] == titanic_df_copy)
+    assert np.all(answers['exercise_10'].values == titanic_df_copy.values)
