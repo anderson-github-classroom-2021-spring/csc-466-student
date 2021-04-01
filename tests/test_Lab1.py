@@ -15,6 +15,11 @@ import numpy as np
 np.random.seed(1)
 c = np.random.rand(6,4)
 
+import pandas as pd
+titanic_df = pd.read_csv(
+    f"{DIR}/../data/titanic.csv"
+)
+
 def test_exercise_1():
     assert np.all(answers['exercise_1'] == helper.exercise_1())
 
