@@ -52,6 +52,7 @@ def exercise_9(titanic_df):
 
 def exercise_10(titanic_df):
     # YOUR SOLUTION HERE
+    return
 
 def exercise_11(X,y):
     # YOUR SOLUTION HERE
