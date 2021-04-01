@@ -40,7 +40,20 @@ def exercise_7():
     # YOUR SOLUTION HERE
     return b
 
-def exercise_15(X,y):
+def exercise_8(titanic_df):
+    sel = None
+    # YOUR SOLUTION HERE
+    return sel
+
+def exercise_9(titanic_df):
+    sel = None
+    # YOUR SOLUTION HERE
+    return sel
+
+def exercise_10(titanic_df):
+    # YOUR SOLUTION HERE
+
+def exercise_11(X,y):
     # YOUR SOLUTION HERE
     model = None
     return model
