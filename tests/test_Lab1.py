@@ -54,5 +54,5 @@ def test_exercise_9():
 
 def test_exercise_10():
     titanic_df_copy = titanic_df.set_index('Name')
-    Lab1_helper.exercise_10(titanic_df_copy)
+    helper.exercise_10(titanic_df_copy)
     assert np.all(answers['exercise_10'] == titanic_df_copy)
