@@ -11,6 +11,7 @@ answers = joblib.load(str(DIR)+"/answers_Lab1.joblib")
 # Import the student solutions
 import Lab1_helper as helper
 
+import numpy as np
 np.random.seed(1)
 c = np.random.rand(6,4)
 
