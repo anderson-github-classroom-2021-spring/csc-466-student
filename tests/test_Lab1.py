@@ -65,6 +65,3 @@ def test_exercise_11():
     model = helper.exercise_11(X,y)
 
     assert np.all(answers['exercise_11'] == model.coef_)
-
-
-model = Lab1_helper.exercise_11(X,y)
