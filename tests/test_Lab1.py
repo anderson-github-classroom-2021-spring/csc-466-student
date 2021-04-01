@@ -62,7 +62,7 @@ def test_exercise_10():
 def test_exercise_11():
     X = credit.drop(['Gender','LoanAmountApproved'],axis=1)
     y = credit['LoanAmountApproved']
-    model = Lab1_helper.exercise_11(X,y)
+    model = helper.exercise_11(X,y)
 
     assert np.all(answers['exercise_11'] == model.coef_)
 
