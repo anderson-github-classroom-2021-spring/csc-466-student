@@ -2,10 +2,10 @@ import sys
 import os
 sys.path.append(".")
 
-import logging
-    
-for name in logging.Logger.manager.loggerDict.keys():
-    logging.getLogger(name).setLevel(logging.CRITICAL)
+import warnings
+
+if not sys.warnoptions:
+    warnings.simplefilter("ignore")
 
 import pathlib
 DIR=pathlib.Path(__file__).parent.absolute()
