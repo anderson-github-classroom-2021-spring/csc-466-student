@@ -43,3 +43,7 @@ def test_exercise_6():
 
 def test_exercise_7():
     assert np.all(answers['exercise_7'] == helper.exercise_7())
+    
+def test_exercise_8():
+    sel = helper.exercise_8(titanic_df)
+    assert np.all(answers['exercise_8'] == sel)
