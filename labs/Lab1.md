@@ -135,7 +135,7 @@ c1,c2 = Lab1_helper.exercise_5(b)
 c1,c2
 ```
 
-## Excercises 6
+## Excercises 6-7
 We will use Pandas at times throughout this course. Please read and study [10 minutes to Pandas](https://pandas.pydata.org/pandas-docs/stable/getting_started/10min.html) before proceeding to any of the exercises below.
 
 

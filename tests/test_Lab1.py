@@ -26,4 +26,15 @@ def test_exercise_3():
 
 def test_exercise_4():
     one,two = helper.exercise_4(c)
-    assert np.all(answers['exercise_4'][0] == one) and np.all(answers['exercise_4'][0] == two)
+    assert np.all(answers['exercise_4'][0] == one) and np.all(answers['exercise_4'][1] == two)
+    
+def test_exercise_5():
+    b = helper.exercise_2()
+    one,two = helper.exercise_5(b)
+    assert np.all(answers['exercise_5'][0] == one) and np.all(answers['exercise_5'][1] == two)
+    
+def test_exercise_6():
+    assert np.all(answers['exercise_6'] == helper.exercise_6())
+
+def test_exercise_7():
+    assert np.all(answers['exercise_7'] == helper.exercise_7())
