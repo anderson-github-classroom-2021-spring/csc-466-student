@@ -136,7 +136,7 @@ c1,c2
 ```
 
 ## Excercises 6-7
-We will use Pandas at times throughout this course. Please read and study [10 minutes to Pandas](https://pandas.pydata.org/pandas-docs/stable/getting_started/10min.html) before proceeding to any of the exercises below.
+We will use Pandas at times throughout this course. Please read and study [10 minutes to Pandas](https://pandas.pydata.org/pandas-docs/stable/user_guide/10min.html) before proceeding to any of the exercises below.
 
 
 #### Exercise 6. Repeat Exercise 1, but create a Pandas DataFrame instead of a NumPy array.
