@@ -20,6 +20,8 @@ titanic_df = pd.read_csv(
     f"{DIR}/../data/titanic.csv"
 )
 
+credit = pd.read_csv(f"{DIR}/../data/credit.csv",index_col=0)
+
 def test_exercise_1():
     assert np.all(answers['exercise_1'] == helper.exercise_1())
 
@@ -56,3 +58,13 @@ def test_exercise_10():
     titanic_df_copy = titanic_df.set_index('Name')
     helper.exercise_10(titanic_df_copy)
     assert answers['exercise_10'].equals(titanic_df_copy)
+    
+def test_exercise_11():
+    X = credit.drop(['Gender','LoanAmountApproved'],axis=1)
+    y = credit['LoanAmountApproved']
+    model = Lab1_helper.exercise_11(X,y)
+
+    assert np.all(answers['exercise_11'] == model.coef_)
+
+
+model = Lab1_helper.exercise_11(X,y)
