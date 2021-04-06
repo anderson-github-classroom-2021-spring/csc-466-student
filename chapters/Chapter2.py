@@ -43,6 +43,7 @@ import pandas as pd
 import numpy as np
 
 fruits = pd.read_csv(f'{home}/csc-466-student/data/fruit_data_with_colours.csv')
+# YOUR SOLUTION HERE
 
 # + [markdown] slideshow={"slide_type": "subslide"}
 # **Stop and think: Can you extract the column names?**

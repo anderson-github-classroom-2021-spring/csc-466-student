@@ -47,6 +47,7 @@ import pandas as pd
 import numpy as np
 
 fruits = pd.read_csv(f'{home}/csc-466-student/data/fruit_data_with_colours.csv')
+# YOUR SOLUTION HERE
 ```
 
 <!-- #region slideshow={"slide_type": "subslide"} -->
