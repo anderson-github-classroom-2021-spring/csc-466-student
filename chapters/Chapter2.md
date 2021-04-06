@@ -373,8 +373,6 @@ This we can solve! The coding of this is left up to a lab.
 <!-- #endregion -->
 
 <!-- #region slideshow={"slide_type": "subslide"} -->
-For a by-hand example and for additional reading for this chapter, please see Chapter 2 from Marsland.
-
 For a seque into the preliminaries of KDD, how do you know how well this fruit detector will work?
 <!-- #endregion -->
 
@@ -384,6 +382,10 @@ For a seque into the preliminaries of KDD, how do you know how well this fruit d
 https://docs.google.com/presentation/d/1hMB1Y9vQzT27LGfJpjMFWOZsXna23hClXtqQo6SeMQI/edit?usp=sharing
 <!-- #endregion -->
 
+<!-- #region slideshow={"slide_type": "subslide"} -->
+For a by-hand example of naive Bayes classifier and for additional reading for this chapter, please see Chapter 2 from Marsland.
+<!-- #endregion -->
+
 <!-- #region slideshow={"slide_type": "slide"} -->
 ## From Machine Learning back to KDD
 
@@ -391,7 +393,9 @@ Computing feature importance is one of the most common methods of extracting kno
 <!-- #endregion -->
 
 <!-- #region slideshow={"slide_type": "subslide"} -->
-## Coming on Thursday :)
+> In the end, you need to decide whether you want to know how much the model relies on each feature for making predictions (-> training data) or how much the feature contributes to the performance of the model on unseen data (-> test data)
+
+https://christophm.github.io/interpretable-ml-book/feature-importance.html
 <!-- #endregion -->
 
 ```python
