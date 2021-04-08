@@ -20,7 +20,7 @@ import pandas as pd
 import numpy as np
 
 titanic_df = pd.read_csv(
-    f"{home}/csc-466-student/data/titanic.csv"
+    f"{DIR}/../data/titanic.csv"
 )
 
 features = ['Pclass','Survived','Sex','Age']
