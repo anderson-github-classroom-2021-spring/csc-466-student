@@ -34,7 +34,7 @@ X = titanic_df.drop("Survived",axis=1)
 y = titanic_df["Survived"]
 
 def test_exercise_1():
-    survived_priors = Lab2_helper.compute_priors(titanic_df['Survived'])
+    survived_priors = Lab2_helper.compute_priors(titanic_df['Age'])
     assert answers['exercise_1'] == survived_priors
 
 def test_exercise_2():
