@@ -26,9 +26,7 @@ Please see the README for instructions on how to submit and obtain the lab.
 
 # make sure your run the cell above before running this
 import Lab1_helper
-```
 
-```python
 from pathlib import Path
 home = str(Path.home()) # all other paths are relative to this path. change to something else if this is not the case on your system
 ```
