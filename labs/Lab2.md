@@ -203,7 +203,7 @@ You can always load up the answers for the autograder. The autograder runs your 
 ```python
 import joblib
 answers = joblib.load(f"{home}/csc-466-student/tests/answers_Lab2.joblib")
-answers
+answers.keys()
 ```
 
 ```python
