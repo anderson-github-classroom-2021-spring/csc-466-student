@@ -45,7 +45,7 @@ def test_exercise_1():
 
 def test_exercise_2():
     prob = Lab2_helper.specific_class_conditional(titanic_df['Sex'],'female',titanic_df['Survived'],0)
-    assert truncate(answers['exercise_2']) == truncate(prob)
+    assert answers['exercise_2'] == prob
 
 def test_exercise_3():
     probs = Lab2_helper.class_conditional(X,y)
