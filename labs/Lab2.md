@@ -20,14 +20,16 @@ jupyter:
 **Note:** Exercises can be autograded and count towards your lab and assignment score. Problems are graded for participation.
 
 ```python
+from pathlib import Path
+home = str(Path.home()) # all other paths are relative to this path. change to something else if this is not the case on your system
+```
+
+```python
 %load_ext autoreload
 %autoreload 2
 
 # make sure your run the cell above before running this
 import Lab2_helper
-
-from pathlib import Path
-home = str(Path.home()) # all other paths are relative to this path. change to something else if this is not the case on your system
 ```
 
 For this lab, we are going to first implement an empirical naive bayesian classifier, then implement feature importance measures and apply it to a dataset, and finally, we will examine the affect of modifying the priors.
@@ -216,7 +218,7 @@ answers.keys()
 ```
 
 ```python
-
+answers['exercise_8']
 ```
 
 ```python

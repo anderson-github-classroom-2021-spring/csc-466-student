@@ -23,6 +23,7 @@ import numpy as np
 def truncate(d, mult=10000):
     for k in d.keys():
         d[k] = np.round(d[k]*mult)/mult
+    return d
 
 
 titanic_df = pd.read_csv(
@@ -85,4 +86,5 @@ def test_exercise_8():
     np.random.seed(0)
     Xtrain,ytrain,Xtest,ytest=Lab2_helper.train_test_split(X,y)
     importances = Lab2_helper.exercise_8(Xtrain,ytrain,Xtest,ytest)
+    import pdb; pdb.set_trace()
     assert truncate(answers['exercise_8']) == truncate(importances)
