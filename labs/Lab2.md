@@ -76,6 +76,15 @@ survived_priors = Lab2_helper.compute_priors(titanic_df['Survived'])
 survived_priors
 ```
 
+```python
+Lab2_helper.compute_priors(titanic_df['Age'])
+```
+
+```python
+y_example = titanic_df['Age']
+y_example.name
+```
+
 #### Exercise 2
 Create a function to calculate the specific class conditional probability. Assume x and y are pd.Series objects. Assume xv and yv are specific values. This function should return $\Pr(x==xv|y==yv)$.
 

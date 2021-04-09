@@ -19,6 +19,12 @@ import Lab2_helper
 import pandas as pd
 import numpy as np
 
+
+def truncate(d, mult=10000):
+    for k in d.keys():
+        d[k] = np.round(d[k]*mult)/mult
+
+
 titanic_df = pd.read_csv(
     f"{DIR}/../data/titanic.csv"
 )
@@ -35,27 +41,27 @@ y = titanic_df["Survived"]
 
 def test_exercise_1():
     survived_priors = Lab2_helper.compute_priors(titanic_df['Age'])
-    assert answers['exercise_1'] == survived_priors
+    assert truncate(answers['exercise_1']) == truncate(survived_priors)
 
 def test_exercise_2():
     prob = Lab2_helper.specific_class_conditional(titanic_df['Sex'],'female',titanic_df['Survived'],0)
-    assert answers['exercise_2'] == prob
+    assert truncate(answers['exercise_2']) == truncate(prob)
 
 def test_exercise_3():
     probs = Lab2_helper.class_conditional(X,y)
-    assert answers['exercise_3'] == probs
+    assert truncate(answers['exercise_3']) == truncate(probs)
 
 def test_exercise_4():
     probs = Lab2_helper.class_conditional(X,y)
     priors = Lab2_helper.compute_priors(y)
     x = titanic_df.drop("Survived",axis=1).loc[2]
     post_probs = Lab2_helper.posteriors(probs,priors,x)
-    assert answers['exercise_4'] == post_probs
+    assert truncate(answers['exercise_4']) == truncate(post_probs)
 
 def test_exercise_5():
     np.random.seed(2)
     Xtrain,ytrain,Xtest,ytest=Lab2_helper.train_test_split(X,y)
-    assert answers['exercise_5'][0].equals(Xtrain)
+    assert np.all(answers['exercise_5'][0].values == Xtrain.values)
 
 def test_exercise_6():
     np.random.seed(0)
@@ -73,10 +79,10 @@ def test_exercise_7():
     np.random.seed(0)
     Xtrain,ytrain,Xtest,ytest=Lab2_helper.train_test_split(X,y)
     importances = Lab2_helper.exercise_7(Xtrain,ytrain,Xtest,ytest)
-    assert answers['exercise_7'] == importances
+    assert truncate(answers['exercise_7']) == truncate(importances)
 
 def test_exercise_8():
     np.random.seed(0)
     Xtrain,ytrain,Xtest,ytest=Lab2_helper.train_test_split(X,y)
     importances = Lab2_helper.exercise_8(Xtrain,ytrain,Xtest,ytest)
-    assert answers['exercise_8'] == importances
+    assert truncate(answers['exercise_8']) == truncate(importances)
