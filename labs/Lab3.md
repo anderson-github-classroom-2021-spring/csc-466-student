@@ -174,7 +174,7 @@ cm = Lab3_helper.confusion_matrix(t_test,y_test,labels=[0,1])
 cm
 ```
 
-#### Exercise 3
+#### Exercise 4
 Sensitivity, recall, hit rate, or true positive rate (TPR)
 
 ${\displaystyle \mathrm {TPR} ={\frac {\mathrm {TP} }{\mathrm {P} }}={\frac {\mathrm {TP} }{\mathrm {TP} +\mathrm {FN} }}=1-\mathrm {FNR} }$
@@ -204,7 +204,7 @@ stats = Lab3_helper.evaluation(cm,positive_class=0)
 stats
 ```
 
-#### Exercise 4
+#### Exercise 5
 Create a function that trains our neural network for each of the seeds and then returns variable importance of each feature as:
 
 ${\it importance}(w_i) = \frac{1}{|seeds|}\sum_{s \in seeds} \frac{\sqrt{w_i^2}}{max\left(\sqrt{w_0^2}, \sqrt{w_1^2} ... \sqrt{w_d^2}\right)}$
