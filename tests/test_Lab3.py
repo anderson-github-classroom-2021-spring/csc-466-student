@@ -38,6 +38,7 @@ X = pd.get_dummies(titanic_df2.drop('Cabin',axis=1)).dropna()
 means = X.mean()
 sds = X.std()
 X2 = X.apply(lambda x: (x-means)/sds,axis=1)
+t = titanic_df.loc[X2.index,'Survived']
 
 def test_exercise_1():
     seeds = [0,1,2,3,4,5]
