@@ -143,10 +143,18 @@ display(ytest.head())
 For this exercise, create a training dataset of size 50% and then using your solutions to previous exercises, find the prediction accuracy for the test dataset. 
 
 ```python
+ytest
+```
+
+```python
 np.random.seed(0)
 Xtrain,ytrain,Xtest,ytest=Lab2_helper.train_test_split(X,y)
 accuracy = Lab2_helper.exercise_6(Xtrain,ytrain,Xtest,ytest)
 accuracy
+```
+
+```python
+sum(predictions == ytest)
 ```
 
 That's not bad!
@@ -177,7 +185,7 @@ importances = Lab2_helper.exercise_8(Xtrain,ytrain,Xtest,ytest)
 importances
 ```
 
-#### Problem 3. After you implement this, what is the most important feature for our in-class activity prediction dataset? 
+#### Problem 3. After you implement this, what is the most important feature? 
 
 Your answer here
 

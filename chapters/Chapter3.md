@@ -196,7 +196,7 @@ x
 
 ```python slideshow={"slide_type": "fragment"}
 def activation(net,threshold=0):
-    if net > 0:
+    if net > threshold:
         return 1
     return 0
 ```
