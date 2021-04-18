@@ -86,4 +86,4 @@ def test_exercise_8():
     np.random.seed(0)
     Xtrain,ytrain,Xtest,ytest=Lab2_helper.train_test_split(X,y)
     importances = Lab2_helper.exercise_8(Xtrain,ytrain,Xtest,ytest)
-    assert truncate(answers['exercise_8'],mult=100) == truncate(importances,mul=100)
+    assert truncate(answers['exercise_8'],mult=100) == truncate(importances,mult=100)
