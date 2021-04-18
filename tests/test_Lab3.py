@@ -64,7 +64,7 @@ def test_exercise_3():
     w,X_test,t_test,results = Lab3_helper.train(X2,t,seed=0)
     y_test = Lab3_helper.predict(w,X_test)
     cm = Lab3_helper.confusion_matrix(t_test,y_test,labels=[0,1])    
-    assert np.all(answers['exercise_3'] == cm.values)
+    assert np.all(answers['exercise_3'].values == cm.values)
 
 def test_exercise_4():
     w,X_test,t_test,results = Lab3_helper.train(X2,t,seed=0)

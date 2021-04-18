@@ -243,7 +243,7 @@ answers.keys()
 ```
 
 ```python
-answers['exercise_1']
+answers['exercise_2']
 ```
 
 ```python
