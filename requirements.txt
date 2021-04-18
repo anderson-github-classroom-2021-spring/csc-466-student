@@ -5,4 +5,4 @@ pytest
 joblib
 networkx
 scipy
-sklearn
+sklearn==0.0
