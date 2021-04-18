@@ -153,10 +153,6 @@ accuracy = Lab2_helper.exercise_6(Xtrain,ytrain,Xtest,ytest)
 accuracy
 ```
 
-```python
-sum(predictions == ytest)
-```
-
 That's not bad!
 
 #### Problem 2:
@@ -227,6 +223,14 @@ answers.keys()
 
 ```python
 answers['exercise_8']
+```
+
+```python
+
+```
+
+```python
+
 ```
 
 ```python
