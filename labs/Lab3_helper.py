@@ -6,13 +6,13 @@ def activation(net):
     return 1/(1+np.exp(-net))
 
 def train(X,t,nepochs=200,n=0.5,test_size=0.3,val_size=0.3,seed=0):
-    np.random.seed(seed)
     X_train, X_test, t_train, t_test = train_test_split(X, t, test_size=test_size,random_state=seed)
     X_train2, X_val, t_train2, t_val = train_test_split(X_train, t_train, test_size=val_size,random_state=seed)
 
     train_accuracy = []
     val_accuracy = []
     nfeatures = X.shape[1]
+    np.random.seed(seed)
     w = 2*np.random.uniform(size=(nfeatures,)) - 1
     
     for epoch in range(nepochs):
