@@ -70,7 +70,7 @@ def test_exercise_3():
 
 def test_exercise_4():
     col,gain_ratio = Lab4_helper.select_split(X2,t)
-    assert np.round(m*answers['exercise_4'][2]) == np.round(m*gain_ratio)
+    assert np.round(m*answers['exercise_4'][1]) == np.round(m*gain_ratio)
 
 def test_exercise_5():
     tree = Lab4_helper.make_tree(X2,t)
@@ -116,4 +116,6 @@ def test_exercise_8():
     source = pd.DataFrame.from_records([stats_id3,stats_c45])
     source['Method'] = ['ID3','C4.5']
     
-    assert np.all(np.round(m*answers['exercise_8'].values[:,:-1]) == np.round(m*source.values[:,:-1]))
+    left = answers['exercise_8'].drop('Method',axis=1)
+    right = source.drop('Method',axis=1)
+    assert np.all(np.round(m*left.values) == np.round(m*right.values))
