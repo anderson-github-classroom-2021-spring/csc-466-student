@@ -116,4 +116,4 @@ def test_exercise_8():
     source = pd.DataFrame.from_records([stats_id3,stats_c45])
     source['Method'] = ['ID3','C4.5']
     
-    assert np.all(np.round(m*answers['exericse_8'].values[:,:-1]) == np.round(m*source.values[:,:-1]))
+    assert np.all(np.round(m*answers['exercise_8'].values[:,:-1]) == np.round(m*source.values[:,:-1]))
