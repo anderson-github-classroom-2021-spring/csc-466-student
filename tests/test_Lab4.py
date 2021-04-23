@@ -49,8 +49,9 @@ X2['Fare'].value_counts()
 
 t = titanic_df.loc[X2.index,'Survived']
 
+m = 1000
+
 def test_exercise_1():
-    m = 1000
     e1 = Lab4_helper.entropy(t)
     e2 = Lab4_helper.entropy(X2['CabinLetter'])
     assert np.round(m*answers['exercise_1'][1]) == np.round(m*e2)
@@ -115,5 +116,4 @@ def test_exercise_8():
     source = pd.DataFrame.from_records([stats_id3,stats_c45])
     source['Method'] = ['ID3','C4.5']
     
-    m = 1000
     assert np.all(np.round(m*answers['exericse_8'].values[:,:-1]) == np.round(m*source.values[:,:-1]))
