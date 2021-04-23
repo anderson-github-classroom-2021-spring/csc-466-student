@@ -227,6 +227,7 @@ Your answer here
 # Don't forget to push with ./submit.sh
 ```
 
+<!-- #region -->
 #### Having trouble with the test cases and the autograder?
 
 You can always load up the answers for the autograder. The autograder runs your code and compares your answer to the expected answer. I manually review your code, so there is no need to hide this from you.
@@ -236,11 +237,4 @@ import joblib
 answers = joblib.load(f"{home}/csc-466-student/tests/answers_Lab4.joblib")
 answers.keys()
 ```
-
-```python
-answers['exercise_2']
-```
-
-```python
-
-```
+<!-- #endregion -->
