@@ -151,6 +151,10 @@ rules = Lab4_helper.generate_rules(tree)
 rules[:5] # the first 5 rules
 ```
 
+```python
+rules
+```
+
 #### Exercise 7
 Create an improved function to create a tree called ``make_tree2``. This function is a recursive function. This function must add support for numeric columns, and it must incorporate a parameter that battles overfitting called ``min_split_count``. Minimum split count is incorporated as an additional base case. To implement, check to see if you have at least min_split_count items (i.e., num_elements >= min_split_count to split). The biggest change comes with the addition of numeric columns (Age and Fare in their original format). Please refer to the Marsland textbook for details on handling numeric values. In short, you try all possible locations to divide a numeric variable. For example, if your column has the values:
 ```
