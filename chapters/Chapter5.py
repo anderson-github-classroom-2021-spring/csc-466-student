@@ -41,7 +41,7 @@ home = str(Path.home()) # all other paths are relative to this path. change to s
 # One thing all these methods have to decide is how to get different models from the same dataset. Bagging gets the different models by dividing up the training data. Boosting gets different models by training a series of models on the residual of the previous model.
 
 # + [markdown] slideshow={"slide_type": "subslide"}
-# ## Random Forest
+# ## Bagging
 # Bagging stands for bootstrap aggregating. 
 #
 # So what is a bootstrap? A bootstrap sample is a sample taken from the original dataset with replacement. A new dataset created with boostrap sampling is the same size as the original. 

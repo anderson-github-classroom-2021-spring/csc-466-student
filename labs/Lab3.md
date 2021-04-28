@@ -105,7 +105,7 @@ alt.Chart(source).mark_line().encode(
 Run a similar experiment but vary the learning rate as below. Keep the seed constant (seed=0). What do the graphs tell you about the parameter ``n`` (i.e., $\eta$)?
 
 ```python
-ns = [0.1,0.2,0.5,0.75,1]
+ns = [0.01,0.1]
 results = None
 # Your solution here
 ```
