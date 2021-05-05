@@ -108,7 +108,7 @@ probs
 ```
 
 #### Exercise 4
-Now you are ready to calculate the posterior probabilities for a given sample. Write and test the following function that returns a dictionary where the keys are of the form "Survived=0|Pclass=1,Sex=male,Age=60". Make sure you return 0 if the specific combination of values does not exist. ``probs`` and ``priors`` are defined the same as above. ``x`` is a pd.Series object that represents a specific example/sample from our dataset.
+Now you are ready to calculate the posterior probabilities for a given sample. Write and test the following function that returns a dictionary where the keys are of the form "Survived=0|Pclass=1,Sex=male,Age=60". Make sure you return 0.5 if the specific combination of values does not exist. ``probs`` and ``priors`` are defined the same as above. ``x`` is a pd.Series object that represents a specific example/sample from our dataset.
 
 ```python
 probs = Lab2_helper.class_conditional(X,y)
