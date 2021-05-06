@@ -61,19 +61,23 @@ The steps are as follows:
 <!-- #region slideshow={"slide_type": "subslide"} -->
 #### Stop and think: Will this algorithm converge at all times?
 
+#### Your solution here
 <!-- #endregion -->
 
 <!-- #region slideshow={"slide_type": "subslide"} -->
 #### Stop and think: How do you pick the starting locations?
 
+#### Your solution here
 <!-- #endregion -->
 
 #### Stop and think: What is the best way?
 
+#### Your solution here
 
 
 #### Stop and think: How do you measure a good solution in clustering?
 
+#### Your solution here
 
 <!-- #region slideshow={"slide_type": "subslide"} -->
 ### K-means from scratch

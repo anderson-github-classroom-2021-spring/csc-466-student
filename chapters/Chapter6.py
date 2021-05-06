@@ -54,17 +54,21 @@ home = str(Path.home()) # all other paths are relative to this path. change to s
 # + [markdown] slideshow={"slide_type": "subslide"}
 # #### Stop and think: Will this algorithm converge at all times?
 #
+# #### Your solution here
 
 # + [markdown] slideshow={"slide_type": "subslide"}
 # #### Stop and think: How do you pick the starting locations?
 #
+# #### Your solution here
 # -
 
 # #### Stop and think: What is the best way?
 #
+# #### Your solution here
 
 # #### Stop and think: How do you measure a good solution in clustering?
 #
+# #### Your solution here
 
 # + [markdown] slideshow={"slide_type": "subslide"}
 # ### K-means from scratch
