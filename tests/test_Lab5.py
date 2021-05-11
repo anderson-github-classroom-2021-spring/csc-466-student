@@ -40,6 +40,7 @@ def test_exercise_1():
     assert np.mean(answers['exercise_1'])*m > np.mean(RMSEs)
 
 def test_exercise_2():
+    ntrials = 50
     RMSEs = []
     for trial in range(ntrials):
         X_train, X_test, t_train, t_test = train_test_split(X2, t, test_size=0.25,random_state=trial)
