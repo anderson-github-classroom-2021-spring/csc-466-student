@@ -37,7 +37,7 @@ home = str(Path.home()) # all other paths are relative to this path. change to s
 # + [markdown] slideshow={"slide_type": "subslide"}
 # Here is an analogy from childhood. Two children are playing with blocks of different colors. One is accompanied by an adult who provides feedback about the color and shape of the blocks. This is supervised learning. The other child is observed but no feedback is provided. Both children play with the blocks, but the second child is doing so in what machine learning experts would say is unsupervised.
 #
-# ![](https://github.com/dlsun/pods/blob/master/07-Unsupervised-Learning/shape_sorter.jpg?raw=1)
+# <img src="https://github.com/dlsun/pods/blob/master/07-Unsupervised-Learning/shape_sorter.jpg?raw=1">
 
 # + [markdown] slideshow={"slide_type": "subslide"}
 # #### K-means algorithm
@@ -83,7 +83,8 @@ df = pd.read_csv(
 df.head()
 
 # + slideshow={"slide_type": "subslide"}
-X = df[['ESR1','AURKA','ERBB2']]
+X = df[['ESR1','AURKA']]#,'ERBB2']]
+# Stop and think: What happens when I put in the third variable? Did your code work? What about the plots?
 X.head()
 
 
@@ -102,29 +103,47 @@ k = 6
 
 means
 
+# +
+import altair as alt
+
+alt.Chart(X).mark_circle(size=60).encode(
+    x='ESR1',
+    y='AURKA') + \
+alt.Chart(means).mark_circle(color='black',size=200).encode(
+    x='ESR1',
+    y='AURKA')
+
 # + slideshow={"slide_type": "subslide"}
 # Stop and think: How would you assign each datapoint to a mean?
+# Stop and think: How would you compute the distortion?
+clusters = []
+distortion = 0
+# Your solution here
+Xc = X.copy()
+Xc['cluster']=clusters
+Xc.head()
+
+# + slideshow={"slide_type": "subslide"}
+distortion
 
 # + slideshow={"slide_type": "subslide"}
 # Stop and think: How would you recompute the mean?
+means = None
+# Your solution here
+means
 
 # + slideshow={"slide_type": "subslide"}
 # Stop and think: Now put it all together and iterate
-
-# + slideshow={"slide_type": "subslide"}
-# Stop and think: Compute the distortion
+# Your solution here
 
 # + slideshow={"slide_type": "subslide"}
 # Stop and think: Now try it all again with different initial means. Did the distortion go up or down?
+# Your interpretation here
 
 # + slideshow={"slide_type": "subslide"}
 # Stop and think: How would you visualize the clustering?
+# Your solution here
 
 # + slideshow={"slide_type": "subslide"}
 # Stop and think: Can you overlay the actual subtypes on this in any manner?
-
-# + [markdown] slideshow={"slide_type": "subslide"}
-# Time permitting we will do the same thing with single linkage hiearchical clustering
-# -
-
-
+# Your solution here
