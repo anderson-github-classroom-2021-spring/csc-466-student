@@ -50,7 +50,7 @@ def print_tree(tree):
         return new_tree
     mytree = fix_keys(mytree)
     print(json.dumps(mytree, indent=4, sort_keys=True))
-    
+
 def generate_rules(tree):
     rules = []
     # Your solution here
