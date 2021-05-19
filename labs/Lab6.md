@@ -13,7 +13,7 @@ jupyter:
     name: python3
 ---
 
-# Lab 5
+# Lab 6
 
 ## Choosing and Using Clustering
 
@@ -33,7 +33,7 @@ home = str(Path.home()) # all other paths are relative to this path. change to s
 %autoreload 2
 
 # make sure your run the cell above before running this
-import Lab5_helper
+import Lab6_helper
 ```
 
 ## Our data
@@ -68,7 +68,7 @@ df = pd.read_csv(f"{home}/csc-466-student/data/housing/boston_fixed.csv")
 df.head()
 ```
 
-**Exercise 1.** Read the descriptions of the features above, and come up with 2-3 reasonable questions with corresponding methods to test them. The only one that you cannot write, is the one we will do as a class, which I use as an example here:
+**Problem 1.** Read the descriptions of the features above, and come up with 2-3 reasonable questions with corresponding methods to test them. The only one that you cannot write, is the one I write below:
 
 Example questions: 
 * Are there any definitive subgroupings (i.e., clusters) of towns in the dataset? 
@@ -84,47 +84,15 @@ Methodology:
 **YOUR SOLUTION HERE**
 
 
-**For the next few questions, we will lean heavily upon sklearn and the built-in models.**
+Overall question: Are there any clusters of towns? 
 
-
-**Exercises 2-9**
-Are there any clusters of towns? Use the following methodology:
+Use the following methodology:
 
 1. Empirically determine the best clustering method from our known list kmeans and hiearchical clustering
 2. Using this best clustering, visualize the data using PCA
 
 
-### Code to get you started
-I included all of the imports I used in this section right here. I encourage you to take a look at their documentation. I also encourage you to try and mess with the parameters yourself and see if you can come up with better combinations. Finally, you can completely break the overall flow of what I've laid out as long as you accomplish the main goals.
-
-```python
-# this is for plotting
-%matplotlib inline 
-
-import copy
-
-# our standard imports
-import numpy as np
-import pandas as pd
-
-# of course we need to be able to split into training and test
-from sklearn.model_selection import train_test_split
-
-# This is where we can get our models
-from sklearn.ensemble import RandomForestClassifier
-
-from sklearn.decomposition import PCA
-
-from sklearn.preprocessing import StandardScaler
-
-from sklearn.cluster import KMeans
-
-from scipy.cluster.hierarchy import dendrogram
-from sklearn.cluster import AgglomerativeClustering
-from sklearn.metrics import classification_report
-```
-
-**Exercise 2** A lot of methods depend on the scaling of data, so we need to decide on a scaling method. We will use the autoscaling method described in sklearn as:
+**Exercise 1** A lot of methods depend on the scaling of data, so we need to decide on a scaling method. We will use the autoscaling method described in sklearn as:
 "The standard score of a sample x is calculated as:
 
 z = (x - u) / s
@@ -134,42 +102,40 @@ where u is the mean of the training samples or zero if with_mean=False, and s is
 For this exercise, scale ``df`` using the StandardScaler in sklearn. For consistency with later code, call this new scaled dataframe ``X``.
 
 ```python
-# YOUR SOLUTION HERE
-X = pd.DataFrame(X,columns=df.columns)
+X = Lab6_helper.scale(df)
 X
 ```
 
-**Exercise 3** We now need to take a look at our data, but it is too many dimensions! For this task we need to reduce the dimension. Reduce the dataset down to two dimensions using PCA. <a href="https://scikit-learn.org/stable/modules/generated/sklearn.decomposition.PCA.html">Here is a link to the documentation.</a> Store the transformed data in a variable called ``X_pca``.
+**Exercise 2** We now need to take a look at our data, but it is too many dimensions! For this task we need to reduce the dimension. Reduce the dataset down to two dimensions using PCA. <a href="https://scikit-learn.org/stable/modules/generated/sklearn.decomposition.PCA.html">Here is a link to the documentation.</a> Store the transformed data in a variable called ``X_pca``.
 
 ```python
-# YOUR SOLUTION HERE
-columns=["PC1 (%0.2f)"%pca.explained_variance_ratio_[0],"PC2 (%0.2f)"%pca.explained_variance_ratio_[1]]
-X_pca = pd.DataFrame(X_pca,columns=columns)
+X_pca = Lab6_helper.pca(X)
 display(X_pca)
-X_pca.plot.scatter(x=columns[0],y=columns[1])
+X_pca.plot.scatter(x=X_pca.columns[0],y=X_pca.columns[1]);
 ```
 
-**Exercise 4** Our next major step is to apply kmeans to our data ``X`` (do NOT cluster on ``X_pca``) for several different values of ``k``. We'll compare these results later. The documentation for kmeans is <a href="https://scikit-learn.org/stable/modules/generated/sklearn.cluster.KMeans.html">here</a>. Fill in the loop that constructs the kmeans models for each of the values of ``k`` specified below.
+**Exercise 3** Our next major step is to apply kmeans to our data ``X`` (do NOT cluster on ``X_pca``) for several different values of ``k``. We'll compare these results later. The documentation for kmeans is <a href="https://scikit-learn.org/stable/modules/generated/sklearn.cluster.KMeans.html">here</a>. Fill in the loop that constructs the kmeans models for each of the values of ``k`` specified below.
 
 ```python
-range_n_clusters = [2, 3, 4, 5, 6]
-kmeans_models = {}
-for n_clusters in range_n_clusters:
+kmeans_models = Lab6_helper.kmeans(X,range_n_clusters = [2, 3, 4, 5, 6],random_state=10)
 kmeans_models
 ```
 
-**Exercise 5** Now we need assign cluster labels to each sample in our dataset. Fill in the following to accomplish this:
+**Exercise 4** Now we need assign cluster labels to each sample in our dataset. Fill in the following to accomplish this:
 
 ```python
-cluster_labels = {}
-for n_clusters in range_n_clusters:
-cluster_labels = pd.DataFrame(cluster_labels)
+cluster_labels = Lab6_helper.assign_labels(X,kmeans_models)
 cluster_labels
 ```
 
-**Exercise 6** We now have 5 different clusterings of our data. We need to know which one of these is the best. Let's visualize the clusters (k=2 and k=3) using the cluster_labels and PCA. <a href="https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.DataFrame.plot.scatter.html">Here is some documentation on how to set the color.</a>
+We now have 5 different clusterings of our data. We need to know which one of these is the best. Let's visualize the clusters (k=2 and k=3) using the cluster_labels and PCA. <a href="https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.DataFrame.plot.scatter.html">Here is some documentation on how to set the color.</a>
 
 ```python
+colorings = {}
+colorings[2] = cluster_labels[2].map({0: "Blue", 1: "Red"}) # This is a new pandas command for us that maps all 0 values to Blue, etc
+colorings[3] = cluster_labels[3].map({0: "Blue", 1: "Red",2: "Pink"}) # This is a new pandas command for us that maps all 0 values to Blue, etc
+X_pca.plot.scatter(x=X_pca.columns[0],y=X_pca.columns[1],c=colorings[2])
+X_pca.plot.scatter(x=X_pca.columns[0],y=X_pca.columns[1],c=colorings[3])
 colorings = {}
 colorings[2] = cluster_labels[2].map({0: "Blue", 1: "Red"}) # This is a new pandas command for us that maps all 0 values to Blue, etc
 colorings[3] = cluster_labels[3].map({0: "Blue", 1: "Red",2: "Pink"}) # This is a new pandas command for us that maps all 0 values to Blue, etc
