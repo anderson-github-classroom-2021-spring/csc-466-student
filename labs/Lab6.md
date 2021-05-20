@@ -36,6 +36,10 @@ home = str(Path.home()) # all other paths are relative to this path. change to s
 import Lab6_helper
 ```
 
+```python
+import numpy as np
+```
+
 ## Our data
 We will be using a well known housing dataset from Boston.
 <pre>
