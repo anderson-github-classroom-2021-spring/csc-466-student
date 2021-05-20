@@ -30,7 +30,7 @@ def test_exercise_1():
 def test_exercise_2():
     X = Lab6_helper.scale(df)
     X_pca = Lab6_helper.pca(X)
-    m = 1000
+    m = 100
     assert np.all(np.round(m*answers['exercise_2'].values) == np.round(m*X_pca.values))
     
 def test_exercise_3():
