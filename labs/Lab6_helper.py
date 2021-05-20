@@ -41,3 +41,17 @@ def assign_labels(X,kmeans_models):
     for n_clusters in kmeans_models.keys():
     cluster_labels = pd.DataFrame(cluster_labels)
     return cluster_labels
+
+
+def silhouette_scores(X,cluster_labels):
+    def d(x,y): # For ease of use if you want it
+        return np.sqrt(np.sum((x-y)**2))
+    a = np.zeros((len(X),))
+    b = np.zeros((len(X),))
+    s = np.zeros((len(X),))
+    return s
+
+def bin_x(x,n_clusters=3,random_state=10):
+    clusterer = None
+    # YOUR SOLUTION HERE
+    return clusterer

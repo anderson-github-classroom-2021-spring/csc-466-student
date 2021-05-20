@@ -15,7 +15,7 @@ jupyter:
 
 # Lab 6
 
-## Choosing and Using Clustering
+## Choosing among parameters when clustering
 
 ### At the end of this lab, I should be able to
 * Formulate your own clustering questions and understand how you can go about getting answers
@@ -141,147 +141,188 @@ colorings[2] = cluster_labels[2].map({0: "Blue", 1: "Red"}) # This is a new pand
 colorings[3] = cluster_labels[3].map({0: "Blue", 1: "Red",2: "Pink"}) # This is a new pandas command for us that maps all 0 values to Blue, etc
 ```
 
-**Exercise 7** OK. We to start assembling information we need to make a decision. There are many ways to evaluate clusters, but one of the best visual ways is through a silhouette plot. Here is an excerpt of the documentation from sklearn:
+### Choosing a $k$
+We will now start assembling information we need to make a decision. There are many ways to evaluate clusters, but one of the best ways is through a silhouette score. Here is an excerpt of the documentation from sklearn:
 "Silhouette analysis can be used to study the separation distance between the resulting clusters. The silhouette plot displays a measure of how close each point in one cluster is to points in the neighboring clusters and thus provides a way to assess parameters like number of clusters visually. This measure has a range of [-1, 1].
 
 Silhouette coefficients (as these values are referred to as) near +1 indicate that the sample is far away from the neighboring clusters. A value of 0 indicates that the sample is on or very close to the decision boundary between two neighboring clusters and negative values indicate that those samples might have been assigned to the wrong cluster." - <a href="https://scikit-learn.org/dev/auto_examples/cluster/plot_kmeans_silhouette_analysis.html#example-cluster-plot-kmeans-silhouette-analysis-py">Source</a>
 
-For this exercise, I'm going to give you the code that produces the silhouette plots. It's long because it is just plotting related code. What I ask is that you use this plot and tell us what the best k value, what is the corresponding silhoutte score, and explain the justification for this decision. In other words, use my output and make the decision.
+```python
+# The silhouette_score gives the average value for all the samples.
+# This gives a perspective into the density and separation of the formed
+# clusters
+from sklearn.metrics import silhouette_score
+
+n_clusters = 2
+silhouette_avg = silhouette_score(X, cluster_labels[n_clusters])
+print("For n_clusters =", n_clusters,
+      "The average silhouette_score is :", silhouette_avg)
+```
+
+The following is pulled directly from https://en.wikipedia.org/wiki/Silhouette_(clustering).
+
+For data point $i\in C_{i}$ (data point $i$ in the cluster $C_{i}$), let
+
+${\displaystyle a(i)={\frac {1}{|C_{i}|-1}}\sum _{j\in C_{i},i\neq j}d(i,j)}$
+
+be the mean distance between ${\displaystyle i}$ and all other data points in the same cluster, where ${\displaystyle d(i,j)}$ is the distance between data points ${\displaystyle i}$ and ${\displaystyle j}$ in the cluster ${\displaystyle C_{i}}$ (we divide by ${\displaystyle |C_{i}|-1}$ because we do not include the distance ${\displaystyle d(i,i)}$ in the sum). We can interpret ${\displaystyle a(i)}$ as a measure of how well ${\displaystyle i}$ is assigned to its cluster (the smaller the value, the better the assignment).
+
+We then define the mean dissimilarity of point ${\displaystyle i}$ to some cluster ${\displaystyle C_{k}}$ as the mean of the distance from ${\displaystyle i}$ to all points in ${\displaystyle C_{k}}$ (where ${\displaystyle C_{k}\neq C_{i}}$).
+
+For each data point ${\displaystyle i\in C_{i}}$, we now define
+
+${\displaystyle b(i)=\min _{k\neq i}{\frac {1}{|C_{k}|}}\sum _{j\in C_{k}}d(i,j)}$
+
+to be the smallest (hence the ${\displaystyle \min }$  operator in the formula) mean distance of ${\displaystyle i}$ to all points in any other cluster, of which ${\displaystyle i}$ is not a member. The cluster with this smallest mean dissimilarity is said to be the "neighboring cluster" of ${\displaystyle i}$ because it is the next best fit cluster for point ${\displaystyle i}$.
+
+We now define a silhouette (value) of one data point ${\displaystyle i}$
+
+${\displaystyle s(i)={\frac {b(i)-a(i)}{\max\{a(i),b(i)\}}}}$, if ${\displaystyle |C_{i}|>1}$
+and ${\displaystyle s(i)=0}$, if ${\displaystyle |C_{i}|=1}$
+
+Which can be also written as:
+
+${\displaystyle s(i)={\begin{cases}1-a(i)/b(i),&{\mbox{if }}a(i)<b(i)\\0,&{\mbox{if }}a(i)=b(i)\\b(i)/a(i)-1,&{\mbox{if }}a(i)>b(i)\\\end{cases}}}$
+From the above definition it is clear that
+
+${\displaystyle -1\leq s(i)\leq 1} -1 \le s(i) \le 1$
+
+
+
+**Exercise 5** Write your own silhouette_scores function that returns $s(i)$ for each sample.
 
 ```python
-from sklearn.metrics import silhouette_samples, silhouette_score
+scores = Lab6_helper.silhouette_scores(X,cluster_labels[n_clusters])
+scores[:10]
+```
 
-import matplotlib.pyplot as plt
-import matplotlib.cm as cm
+```python
+np.mean(scores) # do you match the sklearn implementation?
+```
 
-for n_clusters in range_n_clusters:
-    # Create a subplot with 1 row and 2 columns
-    fig, (ax1, ax2) = plt.subplots(1, 2)
-    fig.set_size_inches(18, 7)
+### Creating our plots
+Let's put it all together and grab the scores for each cluster. I'll take over the plotting here. 
 
-    # The 1st subplot is the silhouette plot
-    # The silhouette coefficient can range from -1, 1 but in this example all
-    # lie within [-0.1, 1]
-    ax1.set_xlim([-0.1, 1])
-    # The (n_clusters+1)*10 is for inserting blank space between silhouette
-    # plots of individual clusters, to demarcate them clearly.
-    ax1.set_ylim([0, len(X) + (n_clusters + 1) * 10])
+```python
+s_df = pd.DataFrame(index=X.index,columns=cluster_labels.columns)
+for k in s_df.columns:
+    s_df.loc[:,k] = Lab6_helper.silhouette_scores(X,cluster_labels[k])
+s_df
+```
 
-    # The silhouette_score gives the average value for all the samples.
-    # This gives a perspective into the density and separation of the formed
-    # clusters
-    silhouette_avg = silhouette_score(X, cluster_labels[n_clusters])
-    print("For n_clusters =", n_clusters,
-          "The average silhouette_score is :", silhouette_avg)
+```python
+s_df.index.name="i"
+s_df = s_df.reset_index()
+s_df
+```
 
-    # Compute the silhouette scores for each sample
-    sample_silhouette_values = silhouette_samples(X, cluster_labels[n_clusters])
+```python
+source = s_df.melt(id_vars=["i"])
+source.columns = ["i","k","s"]
 
-    y_lower = 10
-    for i in range(n_clusters):
-        # Aggregate the silhouette scores for samples belonging to
-        # cluster i, and sort them
-        ith_cluster_silhouette_values = \
-            sample_silhouette_values[cluster_labels[n_clusters] == i]
+import altair as alt
+alt.Chart(source).mark_bar().encode(
+    x = "s:Q",
+    y = alt.Y("i:N",sort='x',axis=alt.Axis(labels=False)),
+    row = "k:N",
+    color = "k:N"
+).resolve_scale(y='independent').properties(height=200)
+```
 
-        ith_cluster_silhouette_values.sort()
+#### Problem 2: What are the average silhouttee scores for each value of $k$? Can you relate this average value to what you are seeing in the above plot? What kind of shape are we looking for?
 
-        size_cluster_i = ith_cluster_silhouette_values.shape[0]
-        y_upper = y_lower + size_cluster_i
+#### Your solution here
 
-        color = cm.nipy_spectral(float(i) / n_clusters)
-        ax1.fill_betweenx(np.arange(y_lower, y_upper),
-                          0, ith_cluster_silhouette_values,
-                          facecolor=color, edgecolor=color, alpha=0.7)
 
-        # Label the silhouette plots with their cluster numbers at the middle
-        ax1.text(-0.05, y_lower + 0.5 * size_cluster_i, str(i))
+## Hiearchical Clustering
 
-        # Compute the new y_lower for next plot
-        y_lower = y_upper + 10  # 10 for the 0 samples
+From here on out there are several problems and only one exercise.
 
-    ax1.set_title("The silhouette plot for the various clusters.")
-    ax1.set_xlabel("The silhouette coefficient values")
-    ax1.set_ylabel("Cluster label")
 
-    # The vertical line for average silhouette score of all the values
-    ax1.axvline(x=silhouette_avg, color="red", linestyle="--")
+**Problem 3:** That was kmeans clustering. What about hiearchical clustering? For this excercise, use the same ``X`` data and create a dendrogram using hiearchical clustering. <a href="https://scikit-learn.org/stable/auto_examples/cluster/plot_agglomerative_dendrogram.html">Here is a link to a sample</a>. After you dig into this code, answer what kind of linkage method was used (answer with more than just the name)?
 
-    ax1.set_yticks([])  # Clear the yaxis labels / ticks
-    ax1.set_xticks([-0.1, 0, 0.2, 0.4, 0.6, 0.8, 1])
+```python
+from matplotlib import pyplot as plt
+from scipy.cluster.hierarchy import dendrogram
+from sklearn.cluster import AgglomerativeClustering
 
-    # 2nd Plot showing the actual clusters formed
-    colors = cm.nipy_spectral(cluster_labels[n_clusters].astype(float) / n_clusters)
-    ax2.scatter(X_pca.values[:, 0], X_pca.values[:, 1], marker='.', s=30, lw=0, alpha=0.7,
-                c=colors, edgecolor='k')
 
-    # Labeling the clusters
-    centers = kmeans_models[n_clusters].cluster_centers_
-    # Draw white circles at cluster centers
-    centers_pca = pca.transform(centers)
-    ax2.scatter(centers_pca[:, 0], centers_pca[:, 1], marker='o',
-                c="white", alpha=1, s=200, edgecolor='k')
+def plot_dendrogram(model, **kwargs):
+    # Create linkage matrix and then plot the dendrogram
 
-    for i, c in enumerate(centers_pca):
-        ax2.scatter(c[0], c[1], marker='$%d$' % i, alpha=1,
-                    s=50, edgecolor='k')
+    # create the counts of samples under each node
+    counts = np.zeros(model.children_.shape[0])
+    n_samples = len(model.labels_)
+    for i, merge in enumerate(model.children_):
+        current_count = 0
+        for child_idx in merge:
+            if child_idx < n_samples:
+                current_count += 1  # leaf node
+            else:
+                current_count += counts[child_idx - n_samples]
+        counts[i] = current_count
 
-    ax2.set_title("The visualization of the clustered data.")
-    ax2.set_xlabel("Feature space for the 1st feature")
-    ax2.set_ylabel("Feature space for the 2nd feature")
+    linkage_matrix = np.column_stack([model.children_, model.distances_,
+                                      counts]).astype(float)
 
-    plt.suptitle(("Silhouette analysis for KMeans clustering on sample data "
-                  "with n_clusters = %d" % n_clusters),
-                 fontsize=14, fontweight='bold')
+    # Plot the corresponding dendrogram
+    dendrogram(linkage_matrix, **kwargs)
 
+# setting distance_threshold=0 ensures we compute the full tree.
+model = AgglomerativeClustering(distance_threshold=0,n_clusters=None)
+
+model = model.fit(X)
+plt.title('Hierarchical Clustering Dendrogram')
+# plot the top three levels of the dendrogram
+plot_dendrogram(model, truncate_mode='level', p=2)
+plt.xlabel("Number of points in node (or index of point if no parenthesis).")
 plt.show()
+
+# YOUR SOLUTION HERE
 ```
 
-
-
-**Exercise 8** That was kmeans clustering. What about hiearchical clustering? For this excercise, use the same ``X`` data and create a dendrogram using hiearchical clustering. <a href="https://scikit-learn.org/stable/auto_examples/cluster/plot_agglomerative_dendrogram.html">Here is a link to a sample</a>. After you dig into this code, answer what kind of linkage method was used (answer with more than just the name)?
+**Problem 4** Now change the linkage method to single linkage, and compare the plots. Are they better or worse?
 
 ```python
 # YOUR SOLUTION HERE
 ```
 
-**Exercise 9** Now change the linkage method to single linkage, and compare the plots.
+### Clustering a single column to produce buckets
+
+
+Now we are going to switch gears and cluster the ``MEDV`` column. First, we will create a density plot of ``MEDV``. Make sure you go back to the original dataframe ``df`` at this point.
 
 ```python
-# YOUR SOLUTION HERE
+ax = df["MEDV"].plot.density();
+ax.set_xlabel('MEDV');
 ```
 
-**Exercise 10** Now we are going to switch gears and cluster the ``MEDV`` column. First, create a density plot of ``MEDV``. Make sure you go back to the original dataframe ``df`` at this point.
+**Exercise 6** To me it looks reasonable that there might be 3 clusters as we have the shoulder sticking out around 30 and the bump at around 50. Using kmeans and k=3, group each town in one of three clusters using the algorithm. 
 
 ```python
-# YOUR SOLUTION HERE
-```
-
-**Exercise 11** To me it looks reasonable that there might be 3 clusters as we have the shoulder sticking out around 30 and the bump at around 50. Using kmeans and k=3, group each town in one of three clusters using the algorithm. 
-
-```python
-clusterer = KMeans(n_clusters=3, random_state=10)
-# YOUR SOLUTION HERE
+clusterer = Lab6_helper.bin_x(df[["MEDV"]])
 labels = clusterer.predict(df[["MEDV"]])
 df["y"] = labels
 display(df)
 df.groupby("y").MEDV.mean()
 ```
 
-**Exercise 12** Now construct a model that tries to predict this new class label using the rest of the dataset. Use RandomForestClassifier. Summarize how we are doing on this classification task. Compare how the variable importance plot changed from the regression version (last lab) and this one.
+```python
+# Good job!
+# Don't forget to push with ./submit.sh
+```
+
+<!-- #region -->
+#### Having trouble with the test cases and the autograder?
+
+You can always load up the answers for the autograder. The autograder runs your code and compares your answer to the expected answer. I manually review your code, so there is no need to hide this from you.
 
 ```python
-# YOUR SOLUTION HERE
-# X_train, X_test, y_train, y_test = train_test_split(???, ???, test_size=0.33, random_state=42)
-y_pred = clf.predict(X_test)
-print(classification_report(y_test, y_pred))
-
-importances = clf.feature_importances_
-importances = pd.DataFrame({'Feature':X_train.columns,'Importance':importances})
-importances.sort_values(by='Importance').set_index('Feature').plot.bar()
-
-# YOUR SOLUTION HERE
+import joblib
+answers = joblib.load(f"{home}/csc-466-student/tests/answers_Lab6.joblib")
+answers.keys()
 ```
+<!-- #endregion -->
 
 ```python
 
