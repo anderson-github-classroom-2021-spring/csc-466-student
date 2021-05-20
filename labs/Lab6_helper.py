@@ -21,24 +21,29 @@ from sklearn.cluster import AgglomerativeClustering
 from sklearn.metrics import classification_report
 
 def scale(df):
+    X = None
     # YOUR SOLUTION HERE
     X = pd.DataFrame(X,columns=df.columns)
     return X
 
 def pca(X):
+    columns = ["Change me","Change me"]
     # YOUR SOLUTION HERE
-    columns=["PC1 (%0.2f)"%pca.explained_variance_ratio_[0],"PC2 (%0.2f)"%pca.explained_variance_ratio_[1]]
     X_pca = pd.DataFrame(X_pca,columns=columns)
     return X_pca
 
 def kmeans(X,range_n_clusters = [2, 3, 4, 5, 6],random_state=10):
     kmeans_models = {}
     for n_clusters in range_n_clusters:
+        # Your solution here
+        pass
     return kmeans_models
 
 def assign_labels(X,kmeans_models):
     cluster_labels = {}
     for n_clusters in kmeans_models.keys():
+        # Your solution here
+        pass
     cluster_labels = pd.DataFrame(cluster_labels)
     return cluster_labels
 
@@ -49,6 +54,7 @@ def silhouette_scores(X,cluster_labels):
     a = np.zeros((len(X),))
     b = np.zeros((len(X),))
     s = np.zeros((len(X),))
+    # Your solution here
     return s
 
 def bin_x(x,n_clusters=3,random_state=10):
