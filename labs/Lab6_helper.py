@@ -28,6 +28,7 @@ def scale(df):
 
 def pca(X):
     columns = ["Change me","Change me"]
+    X_pca = None
     # YOUR SOLUTION HERE
     X_pca = pd.DataFrame(X_pca,columns=columns)
     return X_pca
