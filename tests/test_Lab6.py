@@ -47,6 +47,7 @@ def test_exercise_5():
     X = Lab6_helper.scale(df)
     kmeans_models = Lab6_helper.kmeans(X,range_n_clusters = [2, 3, 4, 5, 6],random_state=10)
     cluster_labels = Lab6_helper.assign_labels(X,kmeans_models)
+    n_clusters = 2
     scores = Lab6_helper.silhouette_scores(X,cluster_labels[n_clusters])
     assert np.all(answers['exercise_5'] == scores)
     
