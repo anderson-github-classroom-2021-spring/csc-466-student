@@ -20,9 +20,9 @@ import pandas as pd
 import numpy as np
 from sklearn.model_selection import train_test_split
 
-ratings = pd.read_csv(f'{home}/csc-466-student/data/movielens-small/ratings.csv') # you might need to change this path
+ratings = pd.read_csv(f'{DIR}/../data/movielens-small/ratings.csv') # you might need to change this path
 ratings = ratings.dropna()
-movies = pd.read_csv(f'{home}/csc-466-student/data/movielens-small/movies.csv')
+movies = pd.read_csv(f'{DIR}/../data/movielens-small/movies.csv')
 movies = movies.dropna()
 data = movies.set_index('movieId').join(ratings.set_index('movieId'),how='inner').reset_index()
 data = data.drop('timestamp',axis=1) # We won't need timestamp here
