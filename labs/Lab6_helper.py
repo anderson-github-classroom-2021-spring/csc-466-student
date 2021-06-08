@@ -26,7 +26,7 @@ def scale(df):
     X = pd.DataFrame(X,columns=df.columns)
     return X
 
-def pca(X):
+def pca(X,random_state=42):
     columns = ["Change me","Change me"]
     X_pca = None
     # YOUR SOLUTION HERE
