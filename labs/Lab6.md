@@ -189,7 +189,7 @@ Which can be also written as:
 ${\displaystyle s(i)={\begin{cases}1-a(i)/b(i),&{\mbox{if }}a(i)<b(i)\\0,&{\mbox{if }}a(i)=b(i)\\b(i)/a(i)-1,&{\mbox{if }}a(i)>b(i)\\\end{cases}}}$
 From the above definition it is clear that
 
-${\displaystyle -1\leq s(i)\leq 1} -1 \le s(i) \le 1$
+${\displaystyle -1\leq s(i)\leq 1}$
 
 
 

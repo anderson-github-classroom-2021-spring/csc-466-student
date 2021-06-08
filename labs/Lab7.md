@@ -92,8 +92,6 @@ I provide a structure for predicting recommentations using user-user collaborati
 
 ```python
 mae = Lab7_helper.predict_user_user(ratings.unstack(),ratings.unstack().loc[1])
-## BEGIN SOLTUION
-answers['exercise_1'] = mae
 mae
 ```
 
@@ -102,8 +100,6 @@ I provide a structure for predicting recommentations using item-item collaborati
 
 ```python
 mae = Lab7_helper.predict_item_item(ratings.unstack(),ratings.unstack().loc[1])
-## BEGIN SOLTUION
-answers['exercise_2'] = mae
 mae
 ```
 
